@@ -7,11 +7,35 @@
 
 import UIKit
 import Firebase
+import FirebaseFirestore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    var doctorList: [DoctorData] = [] // i put 6 doctors on forestore
+    var appointmentsForDoctor: [AppointmentListData] = [] // using a list
 
+    func fetchDoctorDataFromFirebase() {
+        let db = Firestore.firestore()
+        doctorList.removeAll()
+
+        db.collection("doctors").getDocuments { snapshot, error in
+            guard let docs = snapshot?.documents
+            else {
+                return
+            }
+
+            for doc in docs {
+                let data = doc.data()
+
+                if let name = data["name"] as? String{
+                    let d = DoctorData()
+                    d.initWithData(theName: name)
+                    self.doctorList.append(d)
+                }
+            }
+        }
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()

@@ -5,6 +5,12 @@
 //  Created by Muhammad Mahad on 2025-03-22.
 //
 
+/**
+ Pateint is authenticated through authentication service
+ 
+ mahadshahid@gmail.com
+ 
+ */
 import UIKit
 import FirebaseAuth
 
@@ -13,8 +19,6 @@ class PatientLoginViewController: UIViewController {
     @IBOutlet var tfEmail: UITextField!
     @IBOutlet var tfPassword: UITextField!
     @IBOutlet var lblmessage: UILabel!
-    
-    
     
     @IBAction func unwindToPatientLoginVC(for unwindSegue: UIStoryboardSegue, towards subsequentVC: UIViewController) {
         
@@ -33,7 +37,6 @@ class PatientLoginViewController: UIViewController {
             return
         }
 
-        // MARK: Firebase Login
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             if let error = error {
                 self.lblmessage.text = "Error: \(error.localizedDescription)"
@@ -50,7 +53,6 @@ class PatientLoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        lblmessage.text = ""
     }
     
 

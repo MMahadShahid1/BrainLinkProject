@@ -27,12 +27,11 @@ class DoctorLoginViewController: UIViewController {
         let password = tfPassword.text, !password.isEmpty
         else {
             lblmessage.text = "All fields are required!"
-            lblmessage.textColor = .red
+            lblmessage.textColor = .red   
                     
             return
         }
 
-        // MARK: Firebase Login
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             if let error = error {
                 self.lblmessage.text = "Error: \(error.localizedDescription)"
@@ -41,7 +40,6 @@ class DoctorLoginViewController: UIViewController {
             else {
                 self.lblmessage.text = "Login successful!"
                 self.lblmessage.textColor = .green
-                        
             }
         }
     }
